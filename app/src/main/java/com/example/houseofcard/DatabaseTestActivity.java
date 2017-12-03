@@ -2,6 +2,7 @@ package com.example.houseofcard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.mindorks.test.R;
 
 public class DatabaseTestActivity extends AppCompatActivity {
 

@@ -19,8 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.houseofcard.DatabaseTestActivity"></activity>
-    </application>
-
         <activity android:name="com.example.houseofcard.PreStudyActivity" />
 
     </application>
