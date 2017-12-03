@@ -20,6 +20,5 @@
         </activity>
         <activity android:name="com.example.houseofcard.DatabaseTestActivity"></activity>
         <activity android:name="com.example.houseofcard.PreStudyActivity" />
-
     </application>
 </manifest>
