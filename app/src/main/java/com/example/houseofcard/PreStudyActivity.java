@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import static android.net.Uri.encode;
 import static java.lang.Thread.sleep;
+import com.mindorks.test.R;
 
 public class PreStudyActivity extends AppCompatActivity {
     private TextView textView1;

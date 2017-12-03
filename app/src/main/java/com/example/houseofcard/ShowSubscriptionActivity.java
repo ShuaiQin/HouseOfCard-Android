@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static android.net.Uri.encode;
+import com.mindorks.test.R;
 
 public class ShowSubscriptionActivity extends AppCompatActivity {
     private static String USER_ID = "628zhao@gmail.com";
