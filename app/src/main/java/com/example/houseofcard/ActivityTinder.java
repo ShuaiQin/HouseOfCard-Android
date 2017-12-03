@@ -71,21 +71,11 @@ public class ActivityTinder extends AppCompatActivity {
                 if(count == 0){
                     Log.d(TAG, "onItemRemoved: " + count);
 
-                    if(size-times*10<0){
+                    if(times==size){
                         mSwipView.addView(new TinderCard("Done",""));
                     }
-                    else if(size-times*10<10){      // next x cards (0<x<10)
-                        int temp = times*10;
-                        for(int i=temp;i<size;i++){
-                            mSwipView.addView(new TinderCard(strArray[i][0],strArray[i][1]));
-                        }
-                        times++;
-                    }
                     else{                            // next 10 cards
-                        int temp = times*10;
-                        for(int i=0;i<10;i++){
-                            mSwipView.addView(new TinderCard(strArray[temp+i][0],strArray[temp+i][1]));
-                        }
+                        mSwipView.addView(new TinderCard(strArray[times][0],strArray[times][1]));
                         times++;
                     }
                 }
@@ -103,28 +93,9 @@ public class ActivityTinder extends AppCompatActivity {
                         .setRelativeScale(0.01f)
                         .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
-
-        if(size-times*10<10){
-            int temp = times*10;
-            for(int i=temp;i<size;i++){
-                mSwipView.addView(new TinderCard(strArray[i][0],strArray[i][1]));
-            }
-
-        }
-        else{
-            mSwipView.addView(new TinderCard(strArray[0][0],strArray[0][1]));
-            mSwipView.addView(new TinderCard(strArray[1][0],strArray[1][1]));
-            mSwipView.addView(new TinderCard(strArray[2][0],strArray[2][1]));
-            mSwipView.addView(new TinderCard(strArray[3][0],strArray[3][1]));
-            mSwipView.addView(new TinderCard(strArray[4][0],strArray[4][1]));
-            mSwipView.addView(new TinderCard(strArray[5][0],strArray[5][1]));
-            mSwipView.addView(new TinderCard(strArray[6][0],strArray[6][1]));
-            mSwipView.addView(new TinderCard(strArray[7][0],strArray[7][1]));
-            mSwipView.addView(new TinderCard(strArray[8][0],strArray[8][1]));
-            mSwipView.addView(new TinderCard(strArray[9][0],strArray[9][1]));
-            times++;
-        }
-
+        
+        mSwipView.addView(new TinderCard(strArray[times][0],strArray[times][1]));
+        times++;
 
         new Thread(new Runnable(){
             @Override
