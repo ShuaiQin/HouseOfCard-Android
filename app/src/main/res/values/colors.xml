@@ -11,4 +11,9 @@
     <color name="yellow">#f2b632</color>
     <color name="shadow">#77BBBBBB</color>
     <color name="grey">#e5e5e5</color>
+
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#ff4081</color>
+
 </resources>
