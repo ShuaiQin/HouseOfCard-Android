@@ -132,7 +132,6 @@ public class CardOperataion {
     public int getProgress(String house, String card){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
-                CardStore.KEY_CARD + "," +
                 CardStore.PROGRESS +
                 " FROM " + CardStore.TABLE
                 + " WHERE " +
@@ -144,7 +143,7 @@ public class CardOperataion {
         int progress = 50;
         if (cursor.moveToFirst()) {
             do {
-                progress = cursor.getColumnIndex(CardStore.PROGRESS);
+                progress = cursor.getInt(cursor.getColumnIndex(CardStore.PROGRESS));
                 System.out.println("get progress of " + card + ":"+progress);
 
             } while (cursor.moveToNext());
