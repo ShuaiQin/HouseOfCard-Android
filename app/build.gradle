@@ -42,4 +42,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.mindorks:butterknifelite:0.0.3'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services:11.4.2'
 }
+apply plugin: 'com.google.gms.google-services'
