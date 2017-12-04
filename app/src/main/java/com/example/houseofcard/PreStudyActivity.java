@@ -209,4 +209,8 @@ public class PreStudyActivity extends AppCompatActivity {
         houseName = house;
         ctx.startActivity(preStudyIntent);
     }
+
+    public void startStudy(View view) {
+        ActivityTinder.actionStart(PreStudyActivity.this, userID, houseName);
+    }
 }

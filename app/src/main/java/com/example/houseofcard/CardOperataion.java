@@ -8,6 +8,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -126,7 +128,7 @@ public class CardOperataion {
         return ret;
     }
 
-    /*
+
     public int getProgress(String house, String card){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
@@ -143,6 +145,7 @@ public class CardOperataion {
         if (cursor.moveToFirst()) {
             do {
                 progress = cursor.getColumnIndex(CardStore.PROGRESS);
+                System.out.println("get progress of " + card + ":"+progress);
 
             } while (cursor.moveToNext());
         }
@@ -152,17 +155,22 @@ public class CardOperataion {
 
         return progress;
     }
-    */
 
-    public void updateProgress(String house, String card, int progress){
+
+    public void updateProgress(String house, String card, boolean yes){
+        int progress = getProgress(house, card);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String whereClause = CardStore.HOUSE+"=? and "+ CardStore.KEY_CARD+"=?";
         ContentValues value = new ContentValues();
-        value.put(CardStore.PROGRESS, progress);
 
+        if(yes) progress -= 25;
+        else progress += 25;
+
+        System.out.println("progress of " + card + ":"+progress);
+
+        value.put(CardStore.PROGRESS, progress);
         db.update(CardStore.TABLE, value, whereClause, new String[]{house, card} );
         db.close();
-        //db.update()
     }
 
     public void dropTable(){

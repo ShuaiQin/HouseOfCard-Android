@@ -5,6 +5,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.houseofcard.CardOperataion;
+import com.example.houseofcard.CardStore;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.NonReusable;
@@ -27,7 +29,9 @@ public class TinderCard {
 
     private static int count=1;
 
-    private String key_str, value_str;
+    private String key_str, value_str, house;
+
+    private CardOperataion co;
 
     @View(R.id.helloworld)
     private TextView profileTxt;
@@ -52,6 +56,8 @@ public class TinderCard {
     @SwipeOut
     private void onSwipedOut(){
         Log.d("DEBUG", "onSwipedOut");
+        co.updateProgress(house,key_str,false);
+
     }
 
     @SwipeCancelState
@@ -61,7 +67,8 @@ public class TinderCard {
 
     @SwipeIn
     private void onSwipeIn(){
-        Log.d("DEBUG", "onSwipedIn");
+        Log.d("DEBUG", "ZZZZZZZZZZZ" + this.key_str + this.value_str);
+        co.updateProgress(house,key_str,true);
     }
 
     @SwipeInState
@@ -80,9 +87,12 @@ public class TinderCard {
         Log.d("DEBUG", "onSwipeHead");
     }
 
-    public TinderCard(String key_str, String value_str){
+    public TinderCard(String key_str, String value_str, String house , CardOperataion co){
         this.key_str = key_str;
         this.value_str = value_str;
+        this.house = house;
+        this.co = co;
+
     }
     public TinderCard(){
 
