@@ -11,13 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.houseofcard.ActivityTinder" />
-        <activity android:name="com.example.houseofcard.ShowSubscriptionActivity">
+        <activity android:name="com.example.houseofcard.ShowSubscriptionActivity" />
+
+        <activity android:name="com.example.houseofcard.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.example.houseofcard.DatabaseTestActivity"></activity>
         <activity android:name="com.example.houseofcard.PreStudyActivity" />
         <activity android:name="com.example.houseofcard.StudyFinishActivity"></activity>
