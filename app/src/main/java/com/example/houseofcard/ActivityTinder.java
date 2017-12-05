@@ -7,8 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.mindorks.butterknifelite.ButterKnifeLite;
 import com.mindorks.butterknifelite.annotations.BindView;
 import com.mindorks.butterknifelite.annotations.OnClick;
@@ -18,6 +25,18 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeIn;
 import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 import com.example.test.swipe.TinderCard;
 import com.mindorks.test.R;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class ActivityTinder extends AppCompatActivity {
 
@@ -25,41 +44,16 @@ public class ActivityTinder extends AppCompatActivity {
     private static String userID;
     private static String houseName;
 
+    private static String mJSONURLString;
+
     private CardOperataion co;
 
     @BindView(R.id.swipeView)
     private SwipePlaceHolderView mSwipView;
 
-    String[][] strArray = {
-            {"1","a"},
-            {"2","b"},
-            {"3","c"},
-//            {"4","d"},
-//            {"5","e"},
-//            {"6","f"},
-//            {"7","g"},
-//            {"8","h"},
-//            {"9","i"},
-//            {"10","j"},
-//            {"11","k"},
-//            {"12","l"},
-//            {"13","m"},
-//            {"14","n"},
-//            {"15","o"},
-//            {"16","p"},
-//            {"17","q"},
-//            {"18","r"},
-//            {"19","s"},
-//            {"20","t"},
-//            {"21","u"},
-//            {"22","v"},
-//            {"23","w"},
-//            {"24","x"},
-//            {"25","y"},
-//            {"26","z"},
-    };
+    private static String[][] strArray;
 
-    int size = strArray.length;
+    // int size = strArray.length;
     int times = 0;
 
     @Override
@@ -67,11 +61,17 @@ public class ActivityTinder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tinder_swipe);
 
-        houseName = "test";
+        String a = getIntent().getStringExtra("key_string");
+
+        System.out.println(a);
+
+//        co = new CardOperataion(this);
+//        co.initialize(strArray, houseName);
+
         co = new CardOperataion(this);
+
         if(co.numberOfCards(houseName)==0)
             co.initialize(strArray, houseName);
-
 
         ButterKnifeLite.bind(this);
     }
@@ -159,9 +159,16 @@ public class ActivityTinder extends AppCompatActivity {
     }
 
     public static void actionStart(Context ctx, String user, String house) {
-        Intent tinderIntent = new Intent(ctx, ActivityTinder.class);
+
         userID = user;
         houseName = house;
+
+        String stringToSend="Hello";
+        Intent tinderIntent = new Intent(ctx, ActivityTinder.class);
+
+        tinderIntent.putExtra("key_string",stringToSend);
+
+        // strArray = message;
         ctx.startActivity(tinderIntent);
     }
 
@@ -195,5 +202,51 @@ public class ActivityTinder extends AppCompatActivity {
         resultingCard[1] = remainCards[selectedIndex][1];
 
         return resultingCard;
+    }
+
+
+    public static Map<String, Object> jsonToMap(JSONObject json) throws JSONException {
+        Map<String, Object> retMap = new HashMap<String, Object>();
+
+        if(json != JSONObject.NULL) {
+            retMap = toMap(json);
+        }
+        return retMap;
+    }
+
+    public static Map<String, Object> toMap(JSONObject object) throws JSONException {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Iterator<String> keysItr = object.keys();
+        while(keysItr.hasNext()) {
+            String key = keysItr.next();
+            Object value = object.get(key);
+
+            if(value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            }
+
+            else if(value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    public static List<Object> toList(JSONArray array) throws JSONException {
+        List<Object> list = new ArrayList<Object>();
+        for(int i = 0; i < array.length(); i++) {
+            Object value = array.get(i);
+            if(value instanceof JSONArray) {
+                value = toList((JSONArray) value);
+            }
+
+            else if(value instanceof JSONObject) {
+                value = toMap((JSONObject) value);
+            }
+            list.add(value);
+        }
+        return list;
     }
 }
