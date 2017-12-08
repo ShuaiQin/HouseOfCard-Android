@@ -3,13 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="350dp"
-    android:layout_height="425dp">
+    android:layout_height="425dp"
+    android:weightSum="1">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:layout_margin="40dp"
+        android:layout_weight="0.14"
+        android:paddingTop="60dp"
+        android:text="Ha! I know it!"
         android:textColor="@android:color/holo_green_light"
-        android:text="Accept"/>
+        android:textSize="32sp"
+        android:textStyle="bold" />
 </LinearLayout>

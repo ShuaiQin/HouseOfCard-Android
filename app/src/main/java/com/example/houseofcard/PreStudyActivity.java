@@ -231,60 +231,66 @@ public class PreStudyActivity extends AppCompatActivity {
 //
 //        } else {
 //
-//        }
+////        }
+        // System.out.print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        CardOperataion co1 = new CardOperataion(ctx);
+        if (co1.numberOfCards(houseName) != 0) {
+            // System.out.print("$$$$$$$$$$$$$$$");
+            ActivityTinder.actionStart(PreStudyActivity.this, userID, houseName);
+        } else {
+            // System.out.print("##############");
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    "http://manage-dot-pigeoncard.appspot.com/gettodaytask?pigeon_id=" + userID
+                            + "&house_id=" + houseName,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // Do something with response
+                            // mTextView.setText(response.toString());
+                            // Process the JSON
+                            // test.setText(response.toString());
+                            try {
+                                JSONArray myJSONArray = response.getJSONArray("list_of_feed_cards");
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                "http://manage-dot-pigeoncard.appspot.com/gettodaytask?pigeon_id=" + userID
-                        + "&house_id=" + houseName,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Do something with response
-                        // mTextView.setText(response.toString());
-                        // Process the JSON
-                        // test.setText(response.toString());
-                        try{
-                            JSONArray myJSONArray = response.getJSONArray("list_of_feed_cards");
+                                myStringArray = new String[myJSONArray.length()][2];
 
-                            myStringArray = new String[myJSONArray.length()][2];
+                                for (int i = 0; i < myJSONArray.length(); i++) {
+                                    myStringArray[i][0] = myJSONArray.getJSONObject(i).getString("key");
+                                    myStringArray[i][1] = myJSONArray.getJSONObject(i).getString("value");
+                                }
 
-                            for (int i = 0; i < myJSONArray.length(); i++) {
-                                myStringArray[i][0] = myJSONArray.getJSONObject(i).getString("key");
-                                myStringArray[i][1] = myJSONArray.getJSONObject(i).getString("value");
+                                // myJSONArray.getJSONObject(0).getString("key");
+                                test.setText("key: " + myStringArray[0][0] + "value: " + myStringArray[0][1]);
+
+                                CardOperataion co = new CardOperataion(ctx);
+                                co.initialize(myStringArray, houseName);
+
+                                ActivityTinder.actionStart(PreStudyActivity.this, userID, houseName);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                            // myJSONArray.getJSONObject(0).getString("key");
-                            test.setText("key: " + myStringArray[0][0] + "value: " + myStringArray[0][1]);
-
-                            CardOperataion co = new CardOperataion(ctx);
-                            co.initialize(myStringArray, houseName);
-
-                            ActivityTinder.actionStart(PreStudyActivity.this, userID, houseName);
-                        }catch (JSONException e){
-                            e.printStackTrace();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        // if error, set text for debug
+                        public void onErrorResponse(VolleyError error) {
+                            test.setText(error.toString());
                         }
                     }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    // if error, set text for debug
-                    public void onErrorResponse(VolleyError error){
-                        test.setText(error.toString());
-                    }
-                }
-        );
+            );
 
-        int socketTimeout = 10000;//10 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        jsonObjectRequest.setRetryPolicy(policy);
-        // Add JsonObjectRequest to the RequestQueue
-        requestQueue.add(jsonObjectRequest);
+            int socketTimeout = 10000;//10 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsonObjectRequest.setRetryPolicy(policy);
+            // Add JsonObjectRequest to the RequestQueue
+            requestQueue.add(jsonObjectRequest);
 
-        Toast.makeText(ctx, "Downloading Cards...Be Patient, Dude!", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(ctx, "Downloading Cards...Be Patient, Dude!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

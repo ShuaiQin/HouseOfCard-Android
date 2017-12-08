@@ -3,11 +3,13 @@ package com.example.houseofcard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,6 +45,8 @@ public class ActivityTinder extends AppCompatActivity {
     private static final String TAG = "ActivityTinder";
     private static String userID;
     private static String houseName;
+
+    private TextView houseShow;
 
     private static String mJSONURLString;
 
@@ -96,7 +100,7 @@ public class ActivityTinder extends AppCompatActivity {
                         String [] selectedCard = getRandomCard(remainCards);
                         mSwipView.addView(new TinderCard(selectedCard[0],selectedCard[1], houseName, co));
                     } else {
-                        StudyFinishActivity.actionStart(ActivityTinder.this, userID);
+                        StudyFinishActivity.actionStart(ActivityTinder.this, userID, houseName);
                     }
 
 //                    if(times==size){
