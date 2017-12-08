@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "183849201301",
-    "project_id": "pigeoncard"
+    "project_number": "88999679324",
+    "project_id": "pigeonrelease"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:183849201301:android:f245fba12ea6ac03",
+        "mobilesdk_app_id": "1:88999679324:android:f245fba12ea6ac03",
         "android_client_info": {
           "package_name": "com.mindorks.test"
         }
       },
       "oauth_client": [
         {
-          "client_id": "183849201301-eop19h5rt9ep4bve0rfbeume9iit8tnb.apps.googleusercontent.com",
+          "client_id": "88999679324-eku8c9n9d9atn3ga0qbp5i9mttc1ddlf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mindorks.test",
-            "certificate_hash": "129d8a30f85a04c096f947fa058043e5904300c5"
+            "certificate_hash": "6b6c50f6bda2d295f503fe07b697fa6716e7d3b9"
           }
         },
         {
-          "client_id": "183849201301-ach0s2c5quihphpu0u6r9em1h01e8cq9.apps.googleusercontent.com",
+          "client_id": "88999679324-0u521ogafftfopb2ri0lh18pefvvpqfr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqQivaIInspShp9tNbRfkGsT1ac-gnqfs"
+          "current_key": "AIzaSyB3INHnavgXCjQ7MUpzQlIAwF-fzCb13RI"
         }
       ],
       "services": {
