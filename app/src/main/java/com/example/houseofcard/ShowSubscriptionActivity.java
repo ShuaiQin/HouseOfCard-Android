@@ -2,6 +2,7 @@ package com.example.houseofcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +43,9 @@ public class ShowSubscriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_subscription);
 
         mContext = getApplicationContext();
+
+        getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+
 
         // Set Pre-Text View
         user = (TextView) findViewById(R.id.user_name);

@@ -49,8 +49,8 @@ public class TinderCard {
 
     @Resolve
     private void onResolve(){
-        nameAgeTxt.setText("Card " + count++ + ": "+key_str);
-        locationNameTxt.setText("House: ");
+        nameAgeTxt.setText("Card" + ": " + key_str);
+        locationNameTxt.setText("From House: " + house);
     }
 
     @SwipeOut
