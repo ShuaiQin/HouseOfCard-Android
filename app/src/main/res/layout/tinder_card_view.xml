@@ -52,14 +52,14 @@
         <TextView
             android:id="@+id/helloworld"
             android:layout_width="match_parent"
-            android:layout_height="183dp"
+            android:layout_height="214dp"
             android:fontFamily="serif"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="30dp"
             android:text="Hello"
             android:textAlignment="center"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
     </android.support.v7.widget.CardView>
 </FrameLayout>
